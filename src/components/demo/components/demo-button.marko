@@ -33,23 +33,27 @@
     onClick("handleChangeButtonVariantClick")
   />
 </div>
+static const buttonSizes = ["small", "normal", "large"];
+static const buttonVariants = ["primary", "secondary"];
 class {
   onInput(input) {
     this.state = {
       buttonSize: input.buttonSize || "small",
       buttonVariant: input.buttonVariant || "primary",
     };
+    this.currentButtonSize = 0;
+    this.currentButtonVariant = 0;
   }
 
   handleChangeButtonSizeClick() {
     const nextButtonSize =
-      buttonSizes[++currentButtonSize % buttonSizes.length];
+      buttonSizes[++this.currentButtonSize % buttonSizes.length];
     this.state.buttonSize = nextButtonSize;
   }
 
   handleChangeButtonVariantClick() {
     const nextButtonVariant =
-      buttonVariants[++currentButtonVariant % buttonVariants.length];
+      buttonVariants[++this.currentButtonVariant % buttonVariants.length];
     this.state.buttonVariant = nextButtonVariant;
   }
 }
