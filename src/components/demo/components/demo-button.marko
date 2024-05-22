@@ -1,0 +1,55 @@
+<table>
+  <tr>
+    <td>
+      <b>Primary:</b>
+    </td>
+    <td>
+      <app-button label="small" size="small" variant="primary"/>
+      <app-button label="normal" size="normal" variant="primary"/>
+      <app-button label="large" size="large" variant="primary"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Secondary:&nbsp;</b>
+    </td>
+    <td>
+      <app-button label="small" size="small" variant="secondary"/>
+      <app-button label="normal" size="normal" variant="secondary"/>
+      <app-button label="large" size="large" variant="secondary"/>
+    </td>
+  </tr>
+</table>
+<div>
+  <app-button
+    label=`Change Button Size - ${state.buttonSize}`
+    size=state.buttonSize
+    variant="primary"
+    onClick("handleChangeButtonSizeClick")
+  />
+  <app-button
+    label=`Change Button Variant - ${state.buttonVariant}`
+    variant=state.buttonVariant
+    onClick("handleChangeButtonVariantClick")
+  />
+</div>
+class {
+  onInput(input) {
+    this.state = {
+      buttonSize: input.buttonSize || "small",
+      buttonVariant: input.buttonVariant || "primary",
+    };
+  }
+
+  handleChangeButtonSizeClick() {
+    const nextButtonSize =
+      buttonSizes[++currentButtonSize % buttonSizes.length];
+    this.state.buttonSize = nextButtonSize;
+  }
+
+  handleChangeButtonVariantClick() {
+    const nextButtonVariant =
+      buttonVariants[++currentButtonVariant % buttonVariants.length];
+    this.state.buttonVariant = nextButtonVariant;
+  }
+}

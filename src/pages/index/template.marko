@@ -1,12 +1,62 @@
-<app-layout>
-  <@head>
-    <title>UI Components Playground</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
-      media="all"
-      rel="stylesheet"/>
-  </@head>
-  <@body>
-    <app-main/>
-  </@body>
-</app-layout>
+<!doctype html>
+<html>
+  <head>
+    <title>Bundle Split Components Demo</title>
+  </head>
+  <body>
+    <header>
+      <h1>Bundle Split Components Demo</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/?componentName=button">
+              Button
+            </a>
+          </li>
+          <li>
+            <a href="/?componentName=tabs">
+              Tabs
+            </a>
+          </li>
+          <li>
+            <a href="/?componentName=numberSpinner">
+              Number Spinner
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <if(input.componentName)>
+        <demo componentName=input.componentName/>
+      </if>
+      <else>
+        <p>
+          This is a demo of how to split components into separate bundles. This is useful for pages that have many components, but only need to load a few of them at a time. This is accomplished by having a lookup that maps component names to their respective templates. When a Marko template is imported from a${" "}
+          <code>.js</code>
+           file on the server, the
+          <code>@marko/webpack</code>
+          ${" "}plugin will generate a separate bundle for that template that only gets injected into the page when the template is rendered. (This is the same mechanism that's used to code split pages)
+        </p>
+        <p>
+          The relevant code is in
+          <code>./src/components/demo/lookup.js</code>
+           and
+          <code>./src/components/demo/index.marko</code>
+           .
+        </p>
+        <p>
+          The demo is driven by queryString, but could be driven by anything (e.g. specific item details, user preferences, experimentation, etc.)
+        </p>
+        <p>
+          Click on the links above to load the page with different components and notice that there are separate bundles loaded.
+        </p>
+      </else>
+    </section>
+  </body>
+</html>

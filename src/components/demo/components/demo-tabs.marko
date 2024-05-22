@@ -1,0 +1,43 @@
+<h3>Static tabs</h3>
+<app-tabs>
+  <@tab label="Home">
+    Content for Home
+  </@tab>
+  <@tab label="Profile">
+    Content for Profile
+  </@tab>
+  <@tab label="Messages">
+    Content for Messages
+  </@tab>
+</app-tabs>
+<h3>Dynamic tabs</h3>
+<app-tabs>
+  <for|tabIndex, tab| in=state.dynamicTabs>
+    <@tab label="Tab " + tabIndex>
+      Content for tab ${tabIndex}: ${tab.timestamp}
+    </@tab>
+  </for>
+</app-tabs>
+<app-button label="Add Tab" onClick("handleAddTabButtonClick")/>
+class {
+  onInput(input) {
+    const now = new Date().toString();
+
+    this.state = {
+      dynamicTabs: [
+        {
+          timestamp: now,
+        },
+        {
+          timestamp: now,
+        },
+      ],
+    };
+  }
+
+  handleAddTabButtonClick() {
+    this.state.dynamicTabs = this.state.dynamicTabs.concat({
+      timestamp: "" + new Date(),
+    });
+  }
+}
