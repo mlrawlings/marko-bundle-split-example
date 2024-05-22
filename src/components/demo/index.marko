@@ -1,2 +1,4 @@
 import componentLookup from "./lookup";
-<${componentLookup[input.componentName]}/>
+<for|componentName| of=input.componentName.split(",")>
+  <${componentLookup[componentName]}/>
+</for>
